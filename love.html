@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+    <title>Lover</title>
+    <link rel="shortcut icon" href="./images/love_record/icon.png" type="image/x-icon">
+    <link href="static/css/main.css" rel="stylesheet">
+    <script src="./static/js/search/jquery.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng');
+
+        body {
+            font-family: Ma Shan Zheng;
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background-color: #fff;
+        }
+
+        .scroller {
+            width: 100%;
+            height: 900vh;
+            overflow-x: hidden;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        main {
+            top: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            perspective: 15rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.4rem;
+        }
+
+        @media only screen and (max-width: 600px) {
+            main {
+                font-size: 1.6rem;
+            }
+        }
+
+        .chat {
+            padding: 1rem;
+            transform-style: preserve-3d;
+            transform-origin: bottom center;
+            transform: translateY(calc(-50% + 10rem)) translateZ(calc(100vh * var(--phase, 0))) rotateX(90deg);
+            height: 100%;
+            display: flex;
+            flex-direction: column-reverse;
+            max-width: 80rem;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .chat .dialog {
+            height: 100%;
+            transform: rotateX(-90deg);
+            transform-origin: center bottom;
+            flex: 1;
+            opacity: calc(1 - var(--focal));
+            display: flex;
+            align-items: flex-end;
+            position: relative;
+            width: 100%;
+        }
+
+        .chat .dialog figure {
+            display: flex;
+            align-items: flex-end;
+            position: absolute;
+            width: 100%;
+        }
+
+        .chat .dialog figure img {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 5rem;
+            -webkit-margin-end: 1rem;
+            margin-inline-end: 1rem;
+            border: solid 1px rgba(0, 0, 0, 0.3);
+        }
+
+        .chat .dialog figure p {
+            background-color: #fff;
+            padding: 0.5rem;
+            border-radius: 1rem;
+            max-width: auto;
+            border: solid 1px rgba(0, 0, 0, 0.3);
+            font-size: 30px;
+            font-family: Ma Shan Zheng;
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        @media only screen and (max-width: 600px) {
+            .chat .dialog figure p {
+                padding: 1rem;
+            }
+        }
+
+        .chat .dialog.me {
+            justify-content: flex-end;
+        }
+
+        .chat .dialog.me img {
+            -webkit-margin-end: 0;
+            margin-inline-end: 0;
+            -webkit-margin-start: 1rem;
+            margin-inline-start: 1rem;
+        }
+
+        .chat .dialog.me figure {
+            flex-direction: row-reverse;
+        }
+
+        .chat .dialog.me figure p {
+            background-color: #fff;
+        }
+
+        .container {
+            text-align: center;
+            position: fixed;
+            left: 50%;
+            top: 10%;
+            transform: translate(-50%, -50%);
+        }
+
+        #title {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        #datetime {
+            font-size: 20px;
+            color: red;
+        }
+
+        .time {
+            font-size: px;
+            color: black;
+        }
+
+        .heart {
+            width: 18px;
+            height: 28px;
+            border-radius: 32px 33px 0px 0px;
+            background-color: rgb(193, 17, 17);
+            position: absolute;
+            transform: rotate(-51deg);
+            display: inline-block;
+        }
+
+        .heart::after {
+            content: '';
+            width: 18px;
+            height: 28px;
+            border-radius: 31px 31px 0px 0px;
+            background-color: rgb(193, 17, 17);
+            position: absolute;
+            left: 6px;
+            transform: rotate(103deg);
+            top: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <audio id="music" src="./music/love_record/LastDance.mp3" preload="true" autoplay="true" loop="true"></audio>
+    <div class="container">
+        <div id="title">我们已经相恋</div>
+        <div id="datetime"></div>
+    </div>
+
+    <div class="scroller"></div>
+    <main>
+        <section class="chat">
+            <div class="dialog you">
+                <figure>
+                    <img src="./images/love_record/you.png" />
+                    <p>希望宝宝天天都要开心</p>
+                </figure>
+            </div>
+            <div class="dialog me">
+                <figure>
+                    <img src="./images/love_record/me.png" />
+                    <p>宝宝在学习没有喔我爱你</p>
+                </figure>
+            </div>
+            <div class="dialog you">
+                <figure>
+                    <img src="./images/love_record/you.png" />
+                    <p>我爱你我们要一直在一起</p>
+                </figure>
+            </div>
+            <div class="dialog me">
+                <figure>
+                    <img src="./images/love_record/me.png" />
+                    <p>我爱你是猪猪</p>
+                </figure>
+            </div>
+            <div class="dialog you">
+                <figure>
+                    <img src="./images/love_record/you.png" />
+                    <p>我爱你糊糊</p>
+                </figure>
+            </div>
+            <div class="dialog me">
+                <figure>
+                    <img src="./images/love_record/me.png" />
+                    <p>我爱你啵啵</p>
+                </figure>
+            </div>
+            <div class="dialog you">
+                <figure>
+                    <img src="./images/love_record/you.png" />
+                    <p>宝宝亲亲我爱你</p>
+                </figure>
+            </div>
+            <div class="dialog me">
+                <figure>
+                    <img src="./images/love_record/me.png" />
+                    <p>亲亲睡觉 我爱你️ 晚安美丽宝宝</p>
+                </figure>
+            </div>
+            <div class="dialog you">
+                <figure>
+                    <img src="./images/love_record/you.png" />
+                    <p>宝宝认真上课喔我爱你</p>
+                </figure>
+            </div>
+            <div class="dialog me">
+                <figure>
+                    <img src="./images/love_record/me.png" />
+                    <p>最最最爱宝宝我爱你喔 晚安</p>
+                </figure>
+            </div>
+            <div class="dialog you">
+                <figure>
+                    <img src="./images/love_record/you.png" />
+                    <p>我爱你</p>
+                </figure>
+            </div>
+            <div class="dialog me">
+                <figure>
+                    <img src="./images/love_record/me.png" />
+                    <p>我爱你</p>
+                </figure>
+            </div>
+        </section>
+    </main>
+</body>
+<script>
+    
+// 计时
+var datetime = document.getElementById('datetime');
+function fresh(n) {
+    return n >= 0 && n < 10 ? '0' + n : '' + n;
+}
+function getDate() {
+    var date = new Date('2021/07/30 00:00:00').getTime();//获取目标时间的时间戳
+    var now = new Date().getTime();//当前时间戳
+    var second = Math.floor((now - date) / 1000);//时间差秒数
+    var day = Math.floor(second / 86400);//时间差天数
+    second = second % 86400;//除去天数剩下的秒数
+    var hour = Math.floor(second / 3600);//剩下秒数的小时数
+    second %= 3600;//除去小时数剩下的秒数
+    var minute = Math.floor(second / 60);//剩下秒数的分钟数
+    second %= 60;//除去分钟数剩下的秒数
+    var str = fresh(day) + '<span class="time">天</span>' +
+        fresh(hour) + '<span class="time">小时</span>' +
+        fresh(minute) + '<span class="time">分钟</span>' +
+        fresh(second) + '<span class="time">秒</span>';
+    datetime.innerHTML = str;
+}
+setInterval(getDate, 1000);//每秒调用上面的函数
+
+// 
+const chats = [...document.querySelectorAll(".chat .dialog")];
+
+const onScroll = (_) => {
+    const { scrollTop, scrollHeight, clientHeight } = document.scrollingElement;
+    const phase = scrollTop / (scrollHeight - clientHeight);
+    document.body.style.setProperty("--phase", phase);
+
+    chats.forEach((e, i) => {
+        const step = 1 / chats.length;
+        const focalPoint = step * (i - 1);
+        const focal = Math.min(Math.max(1 - (phase - focalPoint) / step, -1), 1);
+        e.style.setProperty("--focal", focal);
+        e.style.opacity = Math.min(Math.max(1 + focal * 2, 0), 1);
+
+        const dist = (phase - step * i) / step;
+        e.style.filter = `blur(${Math.min(Math.abs(dist ** 2 * 0.5), 1.2)}rem)`;
+    });
+};
+window.addEventListener("scroll", onScroll);
+onScroll();
+
+
+
+// 爱心
+var heart = $("<div>").attr('class', 'heart');
+var winHeight = $(document).height();
+var winWidth = $(document).width();
+setInterval(() => {
+    var lovetime = 4000 + 10000 * Math.random(); //动画飘落时间
+    heart.clone().appendTo($("main")).css({
+        "top": "-50px",
+        "left": Math.random() * (winWidth - 50) + 'px'
+    }).animate({
+        "top": (winHeight) + 'px',
+        "left": Math.random() * (winWidth - 50) + 'px'
+    }, lovetime, function () {
+        $(this).remove()
+    })
+}, 100);
+
+// 背景音乐
+function audioAutoPlay(id) {
+    var audio = document.getElementById(id),
+        play = function () {
+            audio.play();
+            document.removeEventListener("touchstart", play, false);
+        };
+    audio.play();
+    document.addEventListener("WeixinJSBridgeReady", function () {//微信
+        play();
+    }, false);
+    document.addEventListener("touchstart", play, false);
+}
+audioAutoPlay('music');
+</script>
+
+</html>

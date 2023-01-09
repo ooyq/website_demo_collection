@@ -1,0 +1,66 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+  <title>新年快乐</title>
+  <link rel="shortcut icon" href="./images/happy_new_year/moon.png">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .city {
+      width: 100%;
+      position: fixed;
+      bottom: 0px;
+      z-index: 100;
+    }
+
+    .city img {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body onselectstart="return false">
+  <canvas id='cas' style="background-color:rgba(0,5,24,1)">浏览器不支持canvas</canvas>
+  <div class="city"><img src="./images/happy_new_year/city.png" alt="" /></div>
+  <img src="./images/happy_new_year/moon.png" alt="" id="moon" style="visibility: hidden;" />
+  <div style="display:none">
+    <div class="shape">2023新年快乐</div>
+    <div class="shape">新春福兔送吉祥</div>
+    <div class="shape">金兔进家富满堂</div>
+    <div class="shape">玉兔迎春添新象</div>
+    <div class="shape">金兔祈福闔家幸福</div>
+    <div class="shape">新春開運鴻兔大展</div>
+    <div class="shape">萬事如意迎新年</div>
+    <div class="shape">玉兔迎春旺全年</div>
+    <div class="shape">ヾ(^∀^)ﾉ</div>
+  </div>
+  <audio id="music" src="./music/happy_new_year/shotfire.mp3" preload loop="true" autoplay="true"></audio>
+  <script src="./static/js/happy_new_year/ice.js"></script>
+</body>
+<script>
+  (function(doc, win) {
+    var docEl = doc.documentElement,
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function() {
+      var clientWidth = docEl.clientWidth;
+      if(!clientWidth) return;
+      if(clientWidth >= 750) {
+        docEl.style.fontSize = '100px';
+      } else {
+        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+      }
+    };
+    if(!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+  })(document, window);
+</script>
+
+</html>

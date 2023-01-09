@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="在线时间戳,时间戳转换,日期转换"/>
+    <meta name="description" content="时间戳与日期的相互转换"/>
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+    <link rel="shortcut icon" href="./images/index/icon.png">
+    <title>时间戳转换</title>
+
+    <style>
+        :root {
+            --background-color: #111;
+            --font-color: #FFF;
+            --current-color: #222;
+        }
+
+        html {
+            font-size: 14px;
+            font-family: Helvetica, Arial, sans-serif;
+            line-height: 1.2;
+            background: var(--background-color);
+            color: var(--font-color);
+        }
+
+        body {
+            margin: 0;
+        }
+
+        input {
+            font: inherit;
+            color: inherit;
+            background: var(--current-color);
+        }
+
+        input {
+            width: 70%;
+            max-width: 400px;
+            display: block;
+            border: 0;
+            margin: 0 auto;
+            padding: 1em;
+            outline: none;
+            font-size: 16px;
+            line-height: 1;
+            text-align: center;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        input::-webkit-search-cancel-button {
+            display: none;
+        }
+
+        input::-webkit-input-placeholder {
+            position: relative;
+            top: 1px;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid rgba(128, 128, 128, .2);
+            margin: 20px auto 20px;
+            width: 50%;
+            max-width: 400px;
+        }
+
+        hr.min {
+            border-top-color: rgba(128, 128, 128, .1);
+            width: 20%;
+        }
+
+        .info-box {
+            text-align: center;
+            padding: 50px 0px 0px 0px;
+        }
+
+        button {
+            font: inherit;
+            color: inherit;
+            background: var(--current-color);
+            width: 80px;
+            height: 45px;
+            border: 0;
+            margin: 0 0 0 0;
+            padding: 1em;
+            outline: none;
+            font-size: 20px;
+            line-height: 2px;
+            text-align: center;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0px;
+            width: 100%;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        footer a {
+            color: aqua;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="info-box" v-else>
+        <h1>时间戳转换</h1>
+        <p id="nowTime">当前时间</p>
+        <p id="nowTimeStamp">当前时间戳</p>
+        <hr>
+        <input type="datetime-local" id="inputTheDate" step="1" value="2099-09-09T09:09:09"><br>
+        <input type="number" id="inputTimeStamp" min="0" placeholder="在这里输入时间戳" value="4092599349"><br>
+        <button id="convertButton">转换</button><br>
+
+        <hr class="min"><br>
+        <label id="SecondsLabel">秒时间戳：</label><br>
+        <label id="Milliseconds">毫秒时间戳：</label><br>
+        <label id="newDate">日期：</label>
+        <footer>
+            <hr class="min">
+            <br>
+            <p>
+                <a href="https://github.com/eoooy" target="_blank">@Eoooy</a>
+            </p>
+        </footer>
+    </div>
+</body>
+
+<script>
+// 转换
+document.getElementById("convertButton").onclick = function () {
+    // 日期转换为时间戳
+    const inputTheDate = document.getElementById('inputTheDate').value;
+    const date1 = new Date(inputTheDate);
+    const timestampInMilliseconds = date1.getTime();
+    const timestampInSeconds = timestampInMilliseconds / 1000;
+    console.log(timestampInMilliseconds);
+    console.log(timestampInSeconds);
+    document.getElementById("SecondsLabel").innerHTML = "秒时间戳： " + timestampInSeconds;
+    document.getElementById("Milliseconds").innerHTML = "毫秒时间戳： " + timestampInMilliseconds;
+
+    // 时间戳转换为日期
+    const timestamp = document.getElementById("inputTimeStamp").value;
+    const date2 = new Date(timestamp * 1000);;
+    const year = date2.getFullYear();
+    const month = date2.getMonth();
+    const day = date2.getDate();
+    const hour = date2.getHours();
+    const minute = date2.getMinutes();
+    const second = date2.getSeconds();
+    const dateString = `${year}年 ${("0" + (month + 1)).slice(-2)}月 ${("0" + day).slice(-2)}日 ${("0" + hour).slice(-2)}:${("0" + minute).slice(-2)}:${("0" + second).slice(-2)}`;
+    document.getElementById("newDate").innerHTML = "日期： " + dateString;
+}
+
+// 当前时间戳显示
+function showTimestamp() {
+    const nowTime = Date();
+    const nowTimeStamp = Date.now();
+    document.getElementById("nowTime").textContent = nowTime;
+    document.getElementById("nowTimeStamp").textContent = "当前时间戳为： " + nowTimeStamp;
+} setInterval(showTimestamp, 100);
+
+</script>
+
+</html>
